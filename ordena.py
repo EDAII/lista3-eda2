@@ -1,10 +1,8 @@
-import matplotlib.pyplot as plt 
-import numpy as np
+
 
 def partition(lista, start, end):
 
-
-    pivot =  lista[end]
+    pivot = lista[end]
     bottom = start - 1
     top = end
 
@@ -16,7 +14,7 @@ def partition(lista, start, end):
             if bottom == top:
                 done = 1
                 break
-            
+
             if lista[bottom] > pivot:
                 lista[top] = lista[bottom]
                 break
@@ -26,7 +24,7 @@ def partition(lista, start, end):
             if top == bottom:
                 done = 1
                 break
-            
+
             if lista[top] < pivot:
                 lista[bottom] = lista[top]
                 break
@@ -34,26 +32,51 @@ def partition(lista, start, end):
     lista[top] = pivot
     return top
 
+
 def quick_sort(lista, start, end):
     if start < end:
         split = partition(lista, start, end)
         quick_sort(lista, start, split - 1)
         quick_sort(lista, split+1, end)
-    else :
+    else:
         return
 
-def shell_sort(lista):
-    pass
 
-def bucket_sort(lista):
-    pass
+def selection_sort(lista):
+    for cont in range(len(lista)):
+        index = cont
+        for cont2 in range(cont+1, len(lista)):
+            if lista[cont2] < lista[index]:
+                index = cont2
+        if index != cont:
+            aux = lista[index]
+            lista[index] = lista[cont]
+            lista[cont] = aux
 
-# def heap_sort(lista)
-#     pass
+    return lista
 
 
-# lista = [5, 4, 6, 8, 1, 2, 3, 8, 2]
+def insertion_sort(lista):
+    for cont in range(1, len(lista)):
+        chave = lista[cont]
 
-# quick_sort(lista, 0, len(lista)-1)
+        aux = cont-1
+        while (aux > -1) and chave < lista[aux]:
+            lista[aux+1] = lista[aux]
+            aux = aux-1
+        lista[aux+1] = chave
 
-# print(lista)
+    return lista
+
+
+def bubble(lista):
+    flag = True
+    while (flag):
+        flag = False
+        for cont in range(0, len(lista)-1):
+            if lista[cont] > lista[cont+1]:
+                aux = lista[cont]
+                lista[cont] = lista[cont+1]
+                lista[cont+1] = aux
+                flag = True
+    return lista
